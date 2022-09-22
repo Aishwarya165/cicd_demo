@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [career, setCareer] =useState([]);
+
   useEffect(() => {
-    axios.get("/Career").then((res) => {
+    axios.get("http://127.0.0.1:8080/items/Career").then((res) => {
       setCareer(res.data);
-        console.log(career);
     })
   });
 
   return (
     <div className={styles.container}>
-      <p>Main Page</p>
+      <p>Main Page</p>``
     </div>
   )
 }
