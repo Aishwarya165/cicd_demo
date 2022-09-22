@@ -1,6 +1,8 @@
-import styles from '../styles/Home.module.css'
 import axios from 'axios';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
+
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [career, setCareer] =useState([]);
@@ -13,7 +15,8 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <p>Main Page</p>``
+      <p>Main Page</p>
+      <Link href="/post">click</Link>
     </div>
   )
 }
