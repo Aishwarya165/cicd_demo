@@ -39,7 +39,8 @@ export default function Home() {
             return(
               <div className={styles.single} key={index}>
                 <p>{id}{' '}{title}</p>
-                <img src={process.env.IMAGEURL+{image}} alt/>
+                <img src={process.env.IMAGEURL+{image}} alt="no_image"/>
+                <img src="https://pvik3n4r.directus.app/assets/88d48122-3afe-487b-b95e-32d582add8ab" alt="hi"/>
                 <p dangerouslySetInnerHTML={{__html: content}}></p>
               </div>
             );
