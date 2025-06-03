@@ -5,14 +5,10 @@ pipeline {
         NODE_ENV = 'production'
     }
 
-    tools {
-        nodejs 'NodeJS_18' // Replace with your configured Node.js version in Jenkins
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://your-repo-url.git'
+                git branch: 'main', url: 'https://github.com/Aishwarya165/cicd_demo.git'
             }
         }
 
