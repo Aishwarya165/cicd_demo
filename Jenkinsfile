@@ -1,58 +1,25 @@
-pipeline {
+pipeline { 
     agent any
 
-    environment {
-        NODE_ENV = 'production'
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Build & Tag Docker Image') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aishwarya165/cicd_demo.git'
+                script {
+                    withDockerRegistry(credentialsId: 'Aishr', toolName: 'docker') {
+                        sh "docker build -t aishrajen15/cicd_demo:latest ."
+                    }
+                }
             }
         }
-
-        stage('Install Dependencies') {
+        
+        stage('Push Docker Image') {
             steps {
-                sh 'npm install'
+                script {
+                    withDockerRegistry(credentialsId: 'Aishr', toolName: 'docker') {
+                        sh "docker push aishrajen15/cicd_demo:latest "
+                    }
+                }
             }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-
-        stage('Export (Optional for Static Sites)') {
-            when {
-                expression { fileExists('next.config.js') }
-            }
-            steps {
-                sh 'npm run export'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'npm test' // Optional: Add your test command
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Add your deployment logic here (e.g., rsync, scp, Docker, etc.)
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!!!'
-        }
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
